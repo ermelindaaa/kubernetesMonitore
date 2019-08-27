@@ -64,10 +64,10 @@ node{
                 sh 'chmod 700 get_helm.sh'
                 sh './get_helm.sh'
             }
-            /* stage ("Prometheus pre-Installation"){
-                sh 'kubectl -n kube-system create service account tiller'
-                sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller'
-                sh 'helm init --service-account tiller'
+             stage ("Prometheus pre-Installation"){
+               // sh 'kubectl -n kube-system create service account tiller'
+                //sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller'
+                // sh 'helm init --service-account tiller'
             }
             stage ("Waiting function"){
                 /*
@@ -97,7 +97,7 @@ node{
             {
                 slackSend message:"build finished "
             }
-            */
+            
         }  
     }
 }
