@@ -66,6 +66,7 @@ node{
              //   sh './get_helm.sh'
             //}
             stage ("Prometheus pre-Installation"){
+                 sh 'git clone https://github.com/ermelindaaa/kubernetesMonitore/tree/master/helm.git'
                 sh'kubectl apply -f helm/service-account.yml'
                 sh'kubectl apply -f helm/role-binding.yml'
                 sh'helm init --service-account tiller --wait'
