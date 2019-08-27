@@ -56,6 +56,7 @@ node{
             stage ("Deployment of the 3 files"){
                sh 'kubectl delete deployment.apps/nfs-client-provisioner'
                 sh 'kubectl create -f yamlFile/deployment.yaml' 
+                sh 'kubectl delete class.apps/managed-nfs-storage'
                 sh 'kubectl create -f yamlFile/class.yaml --validate=false'
                 sh 'kubectl create -f yamlFile/rbac.yaml'
             }
