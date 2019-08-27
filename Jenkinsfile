@@ -53,18 +53,18 @@ node{
                 sh 'git clone https://github.com/ermelindaaa/yamlFile.git'
                 sh "sed -i \"s/<<NFS Server IP>>/\"${remote.host}\"/g\" yamlFile/deployment.yaml"
             }
-            stage ("Deployment of the 3 files"){
-               sh 'kubectl delete deployment.apps/nfs-client-provisioner'
-                sh 'kubectl create -f yamlFile/deployment.yaml' 
-                sh 'kubectl delete class.apps/managed-nfs-storage'
-                sh 'kubectl create -f yamlFile/class.yaml --validate=false'
-                sh 'kubectl create -f yamlFile/rbac.yaml'
-            }
-            stage ("Helm Installation"){
-                sh 'curl -LO https://git.io/get_helm.sh'
-                sh 'chmod 700 get_helm.sh'
-                sh './get_helm.sh'
-            }
+            //stage ("Deployment of the 3 files"){
+             //  sh 'kubectl delete deployment.apps/nfs-client-provisioner'
+               // sh 'kubectl create -f yamlFile/deployment.yaml' 
+                //sh 'kubectl delete class.apps/managed-nfs-storage'
+                //sh 'kubectl create -f yamlFile/class.yaml --validate=false'
+                //sh 'kubectl create -f yamlFile/rbac.yaml'
+            //}
+            //stage ("Helm Installation"){
+              //  sh 'curl -LO https://git.io/get_helm.sh'
+               // sh 'chmod 700 get_helm.sh'
+             //   sh './get_helm.sh'
+            //}
             stage ("Prometheus pre-Installation"){
                 sh'kubectl apply -f helm/service-account.yml'
                 sh'kubectl apply -f helm/role-binding.yml'
