@@ -65,9 +65,20 @@ node{
                 sh './get_helm.sh'
             }
             stage ("Prometheus pre-Installation"){
-                sh 'kubectl -n kube-system create service account tiller'
-                sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller'
-                sh 'helm init --service-account tiller'
+                sh'kubectl apply -f helm/service-account.yml'
+                sh'kubectl apply -f helm/role-binding.yml'
+                sh'helm init --service-account tiller --wait'
+                //sh 'kubectl -n kube-system create service account tiller'
+                //sh 'kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller'
+                //sh 'helm init --service-account tiller'
+            }
+            stage("monitoring")
+            {
+                sh' kubectl apply -f monitoring/namespace.yml'
+
+                sh'helm install stable/prometheus \
+                    --namespace monitoring \
+                    --name prometheus'
             }
             stage ("Waiting function"){
                 /*
